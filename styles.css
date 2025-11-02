@@ -1,0 +1,972 @@
+/* styles.css */
+
+:root {
+  /* Couleurs principales */
+  --c-accent: #FFD700;
+  /* jaune doré pour accent / boutons */
+  --c-accent-dark: #e6c200;
+  /* version foncée de l’accent */
+  --c-bg: linear-gradient(135deg, #1a0068 0%, #3f008f 70%, #5a00b3 100%);
+  --c-text: #ffffff;
+  /* texte clair sur fond sombre */
+  --c-prune: #3f008f;
+  /* violet intermédiaire / prune */
+
+  /* Autres variables utilitaires */
+  --radius: 12px;
+  /* arrondi plus doux */
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --speed: 0.3s;
+  /* durée de transition par défaut */
+  --header-padding: 2.5rem 0;
+  /* padding top+bottom du header normal */
+  --header-padding-small: 1rem 0;
+  /* padding du header réduit */
+  --header-font-size: 2rem;
+  /* taille du titre normal */
+  --header-font-size-small: 1.6rem;
+  --header-max-height: 10vh;
+}
+
+
+/* — Reset / base — */
+/* styles.css avec variables */
+/* ===== SECTION PROGRESSION (desktop) ===== */
+.section-progression {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 colonnes */
+  gap: 2rem;
+}
+
+.progress-item {
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform var(--speed) ease;
+}
+
+.progress-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  transition: transform var(--speed) ease;
+}
+
+.progress-item:hover {
+  transform: translateY(-5px);
+}
+
+.progress-item:hover img {
+  transform: scale(1.05);
+}
+
+.progress-item .caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--c-text);
+}
+
+/* ===== Ajustement tablette/desktop : 2 lignes de 2 images ===== */
+@media (min-width: 992px) {
+  .progress-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+  }
+}
+
+/* ===== Mobile : une seule colonne ===== */
+@media (max-width: 767px) {
+  .progress-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* === Desktop / tablette (écran ≥ 768px) === */
+@media (min-width: 768px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--c-text);
+    background: var(--c-bg);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    text-align: center;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+  }
+
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
+
+  /* Header & navigation */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(26, 0, 104, 0.95);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: background var(--speed) ease;
+  }
+
+  .site-header.scrolled {
+    background: rgba(26, 0, 104, 1);
+  }
+
+  .main-nav {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .main-nav a {
+    margin: 0 1rem;
+    font-weight: bold;
+    transition: color var(--speed) ease;
+  }
+
+  .main-nav a:hover {
+    color: var(--c-accent);
+  }
+
+  .main-nav a.active {
+    color: var(--c-accent);
+    text-decoration: underline;
+  }
+
+  .site-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .site-header .tagline {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--c-accent);
+    color: var(--c-prune);
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius);
+    font-weight: bold;
+    transition: background var(--speed) ease, transform 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--c-accent-dark);
+    transform: scale(1.02);
+  }
+
+  /* Sections générales */
+  .section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    border-radius: var(--radius);
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-intro {
+    padding-top: 8rem;
+  }
+
+  .section-services {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-block {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.8rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: background var(--speed) ease, transform var(--speed) ease;
+  }
+
+  .service-block:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+  }
+
+  .section-experience {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .section-cta {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .section-contact {
+    padding: 6rem 0;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .contact-form label {
+    font-weight: bold;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.8rem;
+    border: 1px solid #555;
+    border-radius: var(--radius);
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--c-text);
+    resize: vertical;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--c-accent);
+    outline: none;
+  }
+
+  .contact-form button {
+    align-self: start;
+    margin-top: 1rem;
+    background: var(--c-accent);
+    color: var(--c-prune);
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background var(--speed) ease;
+  }
+
+  .contact-form button:hover {
+    background: var(--c-accent-dark);
+  }
+
+  /* Footer */
+  .site-footer {
+    background: var(--c-prune);
+    padding: 2rem 0;
+    text-align: center;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--header-padding);
+    background: rgba(26, 0, 104, 0.95);
+    z-index: 1000;
+    transition: padding var(--speed) ease, font-size var(--speed) ease;
+  }
+
+  /* Style quand on scroll (header réduit) */
+  .site-header.shrink {
+    padding: var(--header-padding-small);
+  }
+
+  /* On peut aussi réduire la taille du h1 (titre) ou tagline quand shrink */
+  .site-header.shrink h1 {
+    font-size: var(--header-font-size-small);
+  }
+
+  /* Assure que le main commence après le header normal */
+  main {
+    margin-top: calc(
+        /* hauteur estimée du header normal */
+        /* Ici 2 fois le padding + taille du h1 + tagline, etc. */
+        2.5rem + 2.5rem + 2.5rem
+        /* exemple */
+      );
+  }
+
+
+  :root {
+    --header-padding: 2rem 0;
+    --header-padding-small: 0.6rem 0;
+    --title-font-size: 1.8rem;
+    --title-font-size-small: 1.3rem;
+    --tagline-opacity: 1;
+    --tagline-opacity-small: 0;
+  }
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--header-padding);
+    background: rgba(26, 0, 104, 0.95);
+    z-index: 1000;
+    transition: padding var(--speed) ease;
+  }
+
+  /* Container interne alignement horizontal */
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Partie gauche : titre + tagline */
+  .header-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-title {
+    font-size: var(--title-font-size);
+    margin: 0;
+    color: var(--c-text);
+    transition: font-size var(--speed) ease;
+  }
+
+  #qui-suis-je {
+    text-align: justify;
+  }
+
+  .tagline {
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    color: var(--c-text);
+    transition: opacity var(--speed) ease;
+  }
+
+  /* Partie droite : nav + bouton */
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .header-btn {
+    margin-left: 2rem;
+    /* déjà stylé via .btn-primary */
+    transition: opacity var(--speed) ease, transform var(--speed) ease;
+  }
+
+  /* Style “réduit” du header */
+  .site-header.shrink {
+    padding: var(--header-padding-small);
+  }
+
+  .site-header.shrink .site-title {
+    font-size: var(--title-font-size-small);
+  }
+
+  .site-header.shrink .tagline {
+    opacity: var(--tagline-opacity-small);
+    /* on cache la tagline */
+  }
+
+  .site-header.shrink .header-btn {
+    /* tu peux, selon design, la faire glisser vers la droite, ou la réduire */
+    transform: translateX(50px);
+    /* décale vers la droite */
+    opacity: 1;
+  }
+
+  /* Si tu veux la cacher totalement le bouton en shrink ou la repositionner, tu peux adapter */
+  .site-header.shrink .header-btn.hide {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  /* Ajustement pour que le reste du contenu ne soit pas masqué */
+  main {
+    margin-top: calc((var(--header-padding)) +
+        /* hauteur du titre etc */
+        3rem);
+  }
+
+  /* Responsive : réduction / empilement si petit écran */
+  @media (max-width: 600px) {
+    .header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .header-right {
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .main-nav {
+      gap: 1rem;
+    }
+
+    .header-btn {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* Pour le header global */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Limiter la hauteur du header */
+    max-height: var(--header-max-height);
+    overflow: hidden;
+  }
+
+  /* Le container interne */
+  .header-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Le menu + bouton (droite) : forcer sur une ligne */
+  .header-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* empêche le retour à la ligne */
+  }
+
+  /* Le bouton — forcer qu’il ne se casse pas à la ligne */
+  .header-btn {
+    white-space: nowrap;
+    /* empêche les retours à la ligne à l’intérieur du bouton */
+    margin-left: 1.5rem;
+  }
+
+  /* Le menu de navigation */
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    /* pas de wrapping */
+  }
+
+  /* Si le titre ou nav force une ligne, on peut réduire la taille du texte ou padding */
+  .header-inner .site-title {
+    white-space: nowrap;
+    /* pas de retour à la ligne pour le titre */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Quand shrink : on peut encore réduire la taille ou padding du bouton pour qu’il tienne sur la ligne */
+  .site-header.shrink .header-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .site-header.shrink .main-nav a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .header-left {
+    margin-left: 2%;
+    /* Ajouter 2% de marge à gauche */
+    margin-right: calc(15rem + 2%);
+    /* Ajustez la valeur pour correspondre à la largeur de header-right */
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+  }
+
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .site-header h1 {
+      font-size: 1.6rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .main-nav a {
+      display: block;
+      margin: 0.5rem 0;
+    }
+  }
+
+  .contact-mailto {
+    display: inline-block;
+    background-color: var(--c-accent);
+    color: var(--c-prune);
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background var(--speed) ease, transform 0.2s ease;
+  }
+
+  .contact-mailto:hover {
+    background-color: var(--c-accent-dark);
+    transform: scale(1.02);
+  }
+
+  /* Assure que le header est au-dessus */
+  .site-header {
+    z-index: 1000;
+    /* ou plus grand si besoin */
+    top: 0;
+    left: 0;
+  }
+
+  /* Décaler le contenu principal sous le header */
+  main {
+    /* Tu dois calculer la hauteur approximative du header normal (padding + hauteur du h1 / nav) */
+    margin-top: calc(var(--header-padding) + var(--header-font-size) + 1rem);
+    /* ou un nombre fixe si plus fiable, ex : 80px ou 100px selon ton design */
+  }
+
+  /* Si tu as un conteneur “hero” ou bandeau en haut, appliquer aussi un padding-top similaire */
+  /* Ex : .hero { padding-top: same hauteur } */
+
+  /* Optionnel : si tu utilises overflow hidden sur html/body ou parent, adapte */
+  html,
+  body {
+    overflow-x: hidden;
+    /* ok pour éviter scroll horizontal */
+  }
+
+  /* Styles communs à tous écrans */
+  .section-progression {
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .section-progression .intro {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: var(--c-text);
+  }
+
+  .progress-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .progress-item {
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform var(--speed) ease;
+  }
+
+  .progress-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--speed) ease;
+  }
+
+  .progress-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .progress-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .progress-item .caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--c-text);
+  }
+
+  /* Desktop / tablette */
+  @media (min-width: 768px) {
+    .progress-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .section-progression h2 {
+      font-size: 2rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .progress-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-progression h2 {
+      font-size: 1.6rem;
+    }
+
+    .section-progression .intro {
+      padding: 0 1rem;
+    }
+
+    .progress-item .caption {
+      font-size: 0.85rem;
+    }
+
+  }
+
+
+
+}
+
+/*code pour mobile*/
+@media (max-width: 767px) {
+
+  /* On annule les effets desktop */
+  .site-header,
+  .header-inner,
+  .header-left,
+  .header-right,
+  .main-nav,
+  .header-btn {
+    all: unset;
+    display: revert;
+  }
+
+  body {
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* === HEADER MOBILE === */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(26, 0, 104, 0.95);
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+
+  .site-title {
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--c-text);
+  }
+
+  .tagline {
+    display: none;
+    /* tagline masquée sur mobile */
+  }
+
+  /* === BOUTON HAMBURGER === */
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 28px;
+    height: 24px;
+    padding: 0;
+  }
+
+  .menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--c-accent);
+    border-radius: 2px;
+    transition: transform var(--speed) ease, opacity var(--speed) ease;
+  }
+
+  /* Animation quand le menu est ouvert */
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* === NAVIGATION MOBILE === */
+  .main-nav {
+    position: fixed;
+    top: 60px;
+    /* hauteur du header */
+    left: 0;
+    width: 100%;
+    background: rgba(26, 0, 104, 0.98);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    transform: translateY(-100%);
+    transition: transform var(--speed) ease;
+  }
+
+  .main-nav.open {
+    transform: translateY(0);
+  }
+
+  .main-nav a {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--c-text);
+  }
+
+  .header-btn {
+    margin-top: 1.5rem;
+    background: var(--c-accent);
+    color: var(--c-prune);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: bold;
+  }
+
+  /* Ajustement du contenu principal */
+  main {
+    margin-top: 70px;
+  }
+
+  /* Remise à zéro / annulation partielle des styles desktop */
+  .main-nav {
+    display: none;
+  }
+
+  .header-right {
+    /* on n'affiche pas cette version par défaut */
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    z-index: 1100;
+    position: sticky;
+    /* devant le menu */
+  }
+
+  .menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--c-accent);
+    border-radius: 2px;
+    transition: transform var(--speed) ease, opacity var(--speed) ease;
+  }
+
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Menu vertical mobile */
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* couvrir toute la hauteur mobile */
+    background: rgba(26, 0, 104, 0.98);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transform: translateY(-100%);
+    /* caché vers le haut */
+    transition: transform var(--speed) ease;
+    z-index: 1050;
+  }
+
+  .main-nav.open {
+    transform: translateY(0);
+  }
+
+  .main-nav a {
+    font-size: 1.4rem;
+    color: var(--c-text);
+    text-decoration: none;
+  }
+
+  .header-btn {
+    display: block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius);
+  }
+
+  /* Ajuster le header fixe sur le reste du contenu */
+  main {
+    margin-top: 60px;
+    /* hauteur estimée du header mobile */
+  }
+
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .main-nav {
+    transform: translateY(-100%);
+    transition: transform var(--speed) ease;
+  }
+
+  .main-nav.open {
+    transform: translateY(0);
+  }
+
+  .progression-gallery {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .progression-gallery img {
+    width: 90%;
+    max-width: 90vw;
+    height: auto;
+  }
+
+  .section.progression {
+    padding: 40px 0;
+  }
+
+  .section.progression h2 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+  }
+
+  .section-progression img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius);
+  }
+
+  .discord-badge {
+    bottom: 10px;
+    right: 10px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .discord-badge-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.4rem;
+  }
+
+  .discord-badge-text {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* Badge Discord fixe en coin de page */
+.discord-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  background: rgba(26, 0, 104, 0.9);
+  color: var(--c-text);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  z-index: 2000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform var(--speed) ease, background var(--speed) ease;
+}
+
+.discord-badge:hover {
+  transform: translateY(-3px);
+  background: rgba(26, 0, 104, 1);
+}
+
+.discord-badge-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.6rem;
+}
+
+.discord-badge-text {
+  font-size: 1rem;
+  white-space: nowrap;
+}
