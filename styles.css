@@ -1028,3 +1028,15 @@
   font-size: 1rem;
   white-space: nowrap;
 }
+
+/* Lien vers le témoignage anglais */
+.anglais-link a {
+  color: var(--c-accent);
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color var(--speed) ease;
+}
+
+.anglais-link a:hover {
+  color: var(--c-accent-dark);
+}
